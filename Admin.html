@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ezo.uz - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container { max-width: 800px; margin: 20px auto; padding: 20px; font-family: sans-serif; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+        .product-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9f9f9; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ddd; }
+        .product-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+        .delete-btn { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ezo<span>.uz</span> (Admin)</div>
+        <nav>
+            <a href="index.html">Bosh sahifaga qaytish</a>
+        </nav>
+    </header>
+
+    <div class="admin-container">
+        <h2>Yangi mahsulot qo'shish</h2>
+        <form id="add-product-form" onsubmit="addProduct(event)">
+            <div class="form-group">
+                <label for="p-name">Mahsulot nomi</label>
+                <input type="text" id="p-name" required placeholder="Masalan: Klassik Tufel">
+            </div>
+            <div class="form-group">
+                <label for="p-price">Narxi (so'm)</label>
+                <input type="text" id="p-price" required placeholder="Masalan: 350,000 so'm">
+            </div>
+            <div class="form-group">
+                <label for="p-image">Rasm havolasi (URL)</label>
+                <input type="text" id="p-image" required placeholder="Rasm havolasini yashiring yoki joylang">
+            </div>
+            <div class="form-group">
+                <label for="p-category">Kategoriya</label>
+                <select id="p-category">
+                    <option value="Qishlik">Qishlik</option>
+                    <option value="Bahorlik">Bahorlik</option>
+                    <option value="Yozlik">Yozlik</option>
+                    <option value="Kuzlik">Kuzlik</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" style="width: 100%; padding: 10px; background: #b89773; color: white; border: none; border-radius: 5px; cursor: pointer;">Qo'shish</button>
+        </form>
+
+        <hr style="margin: 30px 0;">
+
+        <h2>Mavjud mahsulotlar</h2>
+        <div id="admin-product-list">
+            <!-- Mahsulotlar shu yerda chiqadi -->
+        </div>
+    </div>
+
+    <script>
+        function loadAdminProducts() {
+            let products = JSON.parse(localStorage.getItem('ezo_products')) || [
+                {name: 'Klassik Tufel', price: '350,000 so\'m', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2', category: 'Bahorlik'},
+                {name: 'Zamonaviy Krossovka', price: '200,000 so\'m', image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a', category: 'Yozlik'}
+            ];
+            
+            let listDiv = document.getElementById('admin-product-list');
+            listDiv.innerHTML = '';
+            
+            products.forEach((p, index) => {
+                listDiv.innerHTML += `
+                    <div class="product-item">
+                        <img src="${p.image}" alt="">
+                        <div>
+                            <strong>${p.name}</strong><br>
+                            <small>${p.price} | ${p.category}</small>
+                        </div>
+                        <button class="delete-btn" onclick="deleteProduct(${index})">O'chirish</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addProduct(event) {
+            event.preventDefault();
+            let name = document.getElementById('p-name').value;
+            let price = document.getElementById('p-price').value;
+            let image = document.getElementById('p-image').value;
+            let category = document.getElementById('p-category').value;
+
+            let products = JSON.parse(localStorage.getItem('ezo_products')) || [
+                {name: 'Klassik Tufel', price: '350,000 so\'m', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2', category: 'Bahorlik'},
+                {name: 'Zamonaviy Krossovka', price: '200,000 so\'m', image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a', category: 'Yozlik'}
+            ];
+
+            products.push({name, price, image, category});
+            localStorage.setItem('ezo_products', JSON.stringify(products));
+
+            document.getElementById('add-product-form').reset();
+            loadAdminProducts();
+            alert('Mahsulot muvaffaqiyatli qo\'shildi!');
+        }
+
+        function deleteProduct(index) {
+            let products = JSON.parse(localStorage.getItem('ezo_products'));
+            products.splice(index, 1);
+            localStorage.setItem('ezo_products', JSON.stringify(products));
+            loadAdminProducts();
+        }
+
+        window.onload = loadAdminProducts;
+    </script>
+</body>
+</html>
