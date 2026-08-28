@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ezo.uz - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">ezo<span>.uz</span> (Admin)</div>
+        <nav>
+            <a href="index.html">Bosh sahifaga qaytish</a>
+        </nav>
+    </header>
+
+    <section class="admin-section" style="padding: 20px;">
+        <h2>Xush kelibsiz, Admin!</h2>
+        <p>Bu yerda do'koningizdagi mahsulotlar va buyurtmalarni boshqarishingiz mumkin.</p>
+        
+        <div class="admin-box" style="margin-top: 20px;">
+            <h3>Mahsulotlar ro'yxati</h3>
+            <ul id="product-list" style="list-style: none; padding: 0; margin-top: 10px;">
+                <li style="padding: 10px; background: #f9f9f9; margin-bottom: 5px; border-radius: 5px;">Klassik Tufel - 350,000 so'm</li>
+                <li style="padding: 10px; background: #f9f9f9; margin-bottom: 5px; border-radius: 5px;">Zamonaviy Krossovka - 200,000 so'm</li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
