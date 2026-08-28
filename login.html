@@ -1,14 +1,42 @@
-<script>
-    function handleLogin(event) {
-        event.preventDefault();
-        
-        let enteredLogin = document.getElementById('login').value;
-        let enteredPassword = document.getElementById('password').value;
-        
-        if (enteredLogin === 'ezo_uz' && enteredPassword === '20070117Hublot') {
-            window.location.href = "index.html";
-        } else {
-            alert('Login yoki parol xato! Qaytadan urinib ko\'ring.');
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ezo.uz - Kirish</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h2>ezo.uz ga kirish</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="login">Login</label>
+                <input type="text" id="login" required placeholder="Loginni kiriting">
+            </div>
+            <div class="input-group">
+                <label for="password">Parol</label>
+                <input type="password" id="password" required placeholder="Parolni kiriting">
+            </div>
+            <button type="submit" class="btn">Kirish</button>
+            <div class="back-link">
+                <a href="index.html">Bosh sahifaga qaytish</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            let enteredLogin = document.getElementById('login').value;
+            let enteredPassword = document.getElementById('password').value;
+            
+            if (enteredLogin === 'ezo_uz' && enteredPassword === '20070117Hublot') {
+                window.location.href = "index.html";
+            } else {
+                alert('Login yoki parol xato! Qaytadan urinib ko\'ring.');
+            }
         }
-    }
-</script>
+    </script>
+</body>
+</html>
