@@ -1,28 +1,14 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirish - ezo.uz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="login-body">
-
-    <div class="login-card">
-        <h2>ezo.uz ga kirish</h2>
-        <form>
-            <div class="input-group">
-                <label>Login</label>
-                <input type="text" value="ezo_uz" required>
-            </div>
-            <div class="input-group">
-                <label>Parol</label>
-                <input type="password" value="20070117Hublot" required>
-            </div>
-            <button type="submit" class="btn login-btn">Kirish</button>
-        </form>
-        <a href="index.html" class="back-home">Bosh sahifaga qaytish</a>
-    </div>
-
-</body>
-</html>
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        let enteredLogin = document.getElementById('login').value;
+        let enteredPassword = document.getElementById('password').value;
+        
+        if (enteredLogin === 'ezo_uz' && enteredPassword === '20070117Hublot') {
+            window.location.href = "index.html";
+        } else {
+            alert('Login yoki parol xato! Qaytadan urinib ko\'ring.');
+        }
+    }
+</script>
